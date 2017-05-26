@@ -4,7 +4,8 @@
 
 #define DISPLAY_WIDTH   1888.f
 #define DISPLAY_HEIGHT  1356.f
-#define CHAR_RESOLUTION 720
+#define CHAR_RESOLUTION 72
+#define ADJUST_SIZE 7
 
 #ifdef __cplusplus
 extern "C" {
@@ -67,8 +68,8 @@ void DrawStringbyCache(int x, int y, int fontSize, std::string argstr) {
 
     FTC_ImageTypeRec font_type;
     font_type.face_id = (FTC_FaceID)1;
-    font_type.width = fontSize << 3;
-    font_type.height= fontSize << 3;
+    font_type.width = fontSize;
+    font_type.height= fontSize;
     font_type.flags = FT_LOAD_RENDER | FT_LOAD_NO_BITMAP;
     FTC_ScalerRec scaler;
     scaler.face_id  = font_type.face_id;
@@ -143,10 +144,10 @@ void DrawStringbyCache(int x, int y, int fontSize, std::string argstr) {
 
     /* 頂点座標点 */
     float vertexs[] = {
-        (2*x-DISPLAY_WIDTH                 )/DISPLAY_WIDTH,(DISPLAY_HEIGHT-2*y                  )/DISPLAY_HEIGHT,
-        (2*x-DISPLAY_WIDTH                 )/DISPLAY_WIDTH,(DISPLAY_HEIGHT-2*y-text_image_height)/DISPLAY_HEIGHT,
-        (2*x-DISPLAY_WIDTH+text_image_width)/DISPLAY_WIDTH,(DISPLAY_HEIGHT-2*y                  )/DISPLAY_HEIGHT,
-        (2*x-DISPLAY_WIDTH+text_image_width)/DISPLAY_WIDTH,(DISPLAY_HEIGHT-2*y-text_image_height)/DISPLAY_HEIGHT,
+        (2*x-DISPLAY_WIDTH                             )/DISPLAY_WIDTH,(DISPLAY_HEIGHT-2*y                              )/DISPLAY_HEIGHT,
+        (2*x-DISPLAY_WIDTH                             )/DISPLAY_WIDTH,(DISPLAY_HEIGHT-2*y-text_image_height*ADJUST_SIZE)/DISPLAY_HEIGHT,
+        (2*x-DISPLAY_WIDTH+text_image_width*ADJUST_SIZE)/DISPLAY_WIDTH,(DISPLAY_HEIGHT-2*y                              )/DISPLAY_HEIGHT,
+        (2*x-DISPLAY_WIDTH+text_image_width*ADJUST_SIZE)/DISPLAY_WIDTH,(DISPLAY_HEIGHT-2*y-text_image_height*ADJUST_SIZE)/DISPLAY_HEIGHT,
     };
     int positionid = glGetAttribLocation(programid, "a_Position");
     glEnableVertexAttribArray(positionid);
