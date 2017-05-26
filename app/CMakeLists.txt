@@ -10,11 +10,6 @@ include_directories(src/main/cpp/freetype/inc)
 add_library(freetype271 SHARED IMPORTED)
 set_target_properties(freetype271 PROPERTIES IMPORTED_LOCATION ../../../../jniLibs/${ANDROID_ABI}/libfreetype271.so)
 
-#libpng
-include_directories(src/main/cpp/libpng)
-add_library(testlibpng SHARED IMPORTED)
-set_target_properties(testlibpng PROPERTIES IMPORTED_LOCATION ../../../../jniLibs/${ANDROID_ABI}/libtestlibpng.so)
-
 #icu
 include_directories(src/main/cpp/icu src/main/cpp/icu/common )
 add_library(testicuuc SHARED IMPORTED)
